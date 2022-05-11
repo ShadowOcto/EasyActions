@@ -1,4 +1,7 @@
 @echo off
+cd .\Addons
+del .\ram.vbs
+del .\ram2.vbs
 title EasyActions [By ShadowOcto]
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if '%errorlevel%' NEQ '0' (
@@ -66,10 +69,29 @@ goto check
 
 :ram
 cd .\Addons
+for /f "skip=1" %%p in ('wmic os get TotalVisibleMemorySize') do ( 
+   set ram=%%p
+)
+echo FreeMem=Space(409600000) > .\ram.vbs
+echo mystring=(80000000) > .\ram2.vbs
+ram.vbs
+ram2.vbs
+echo Optimising Ram... [1/3]
+timeout /t 1 >nul
+del .\ram.vbs
+del .\ram2.vbs
 cls
-echo Optimising Ram...
+echo Optimising Ram... [2/3]
 EmptyStandbyList.exe workingsets
 EmptyStandbyList.exe modifiedpagelist
 EmptyStandbyList.exe priority0standbylist
 EmptyStandbyList.exe standbylist
+cls
+echo Optimising Ram... [3/3]
+timeout /t 1 >nul
+cls
+color 0a
+echo Complete! your ram usage will now slowly decrease.
+pause>nul
+color 0f
 goto select
