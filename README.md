@@ -3,4 +3,4 @@ EasyActions is a batch & python based program that allows you to do simple comma
 
 (+) (Added) </br>
 (-) (Removed) </br>
-(*) (Updated) </br>
+(x) (Updated) </br>
